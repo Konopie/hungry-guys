@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS hungry_guys;
+
+CREATE DATABASE hungry_guys;
