@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+//comment table
 class Comment extends Model {}
 
 Comment.init(
