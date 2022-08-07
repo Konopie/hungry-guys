@@ -1,6 +1,7 @@
 const express = require('express');
 const sequelize = require('./config/connection');
 const path = require('path');
+const seedAll = require('./seeds');
 
 //create app and initialize session variables
 const app = express();
@@ -14,4 +15,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 //turn on the connection to the db server
 sequelize.sync({force: false}).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
+    seedAll();
 })

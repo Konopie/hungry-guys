@@ -65,10 +65,8 @@ Post.hasMany(Rate, {
 
 
 /*
-/*
 Comments are given by users,
 Comment are given to posts
-*/
 */
 Comment.belongsTo(User, {
     foreignKey: 'user_id',
