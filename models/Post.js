@@ -12,6 +12,7 @@ Comment.init(
     },
     user_id: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       references: {
         model: 'user',
         key: 'id'
@@ -19,6 +20,14 @@ Comment.init(
     },
     post_text: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    post_url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isUrl: true
+      }
     }
   },
   {
