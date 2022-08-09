@@ -16,6 +16,17 @@
       </h1>
     </header>
     <main class="row">
+      <section class="col-md-2 bg-light text-dark ">
+        <div id="search-box">
+            <h3>Search for a users posts:</h3>
+            <form >
+            <label for="search-bar">Search</label>
+            <input type="text" id="search-bar" name="search-bar"><br><br>
+            <input type="button" value="search" onClick="getUserPosts(document.getElementById('search-bar').value)">
+            </form>
+        </div>
+        <div id="posts">All Posts</div> 
+      </section>
       {{{ body }}}
     </main>
     <footer class="footer">
@@ -24,5 +35,6 @@
   </div>
 
 </body>
+
 
 </html>

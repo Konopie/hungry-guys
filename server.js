@@ -20,11 +20,15 @@ app.set('view engine', 'handlebars');
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use(routes);
 
 app.get('/', (req, res)=>{
     res.render('home');
+})
+
+app.get('/posts', (req, res)=>{
+    res.render('posts');
 })
 
 //turn on the connection to the db server
