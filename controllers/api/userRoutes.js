@@ -1,6 +1,6 @@
 const express = require("express");
-const {User} = require("../../models/");
-const router = express.Router()
+const {User, Comment, Post, Rate} = require("../../models/");
+const router = express.Router();
 
 // GET /api/user
 router.get("/", (req,res) =>{
@@ -54,7 +54,6 @@ router.put('/:id', (req, res) => {
     });
 });
 
-
 // POST /api/user
 router.post("/", (req,res) =>{
   User.create({
@@ -72,22 +71,23 @@ router.post("/", (req,res) =>{
 
 // DELETE /api/user/1
 router.delete("/:id", (req, res) =>{
-  User.destory({
+  User.destroy({
     where: {
       id: req.params.id
     }
   })
-    .then(dbUserData =>{
-      if (!dbUserData){
-        res.status(404).json({ message: 'No user found with this id'});
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id' });
         return;
       }
       res.json(dbUserData);
     })
-    .catch(err =>{
+    .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
 });
+
 
 module.exports = router;

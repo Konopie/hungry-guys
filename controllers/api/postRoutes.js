@@ -1,5 +1,5 @@
 const express = require("express");
-const {Post} = require("../../models/");
+const {Post, User, Comment, Rate} = require("../../models/");
 const router = express.Router()
 
 // GET /api/post
@@ -54,7 +54,6 @@ router.put('/:id', (req, res) => {
     });
 });
 
-
 // POST /api/post
 router.post("/", (req,res) =>{
   Post.create({
@@ -72,19 +71,20 @@ router.post("/", (req,res) =>{
 
 // DELETE /api/post/1
 router.delete("/:id", (req, res) =>{
-  Post.destory({
+  console.log('id', req.params.id);
+  Post.destroy({
     where: {
       id: req.params.id
     }
   })
-    .then(dbUserData =>{
-      if (!dbUserData){
-        res.status(404).json({ message: 'No user found with this id'});
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(dbUserData);
+      res.json(dbPostData);
     })
-    .catch(err =>{
+    .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
