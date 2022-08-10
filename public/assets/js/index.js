@@ -1,3 +1,5 @@
+// const { response } = require("express");
+
 let postTitle;
 let postText;
 let postList;
@@ -27,29 +29,26 @@ const getUserPosts = (id) => {
 }
 
 const getUsername = (id) => {
-    fetch(`/api/user/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    }).then(userData => {
-      console.log()
-        return userData.username;
-    }
-    )
+    return fetch(`/api/user/${id}`)
+      .then( res => res.json())
+      .then( data => {
+        return data.username;
+      })
 }
 
 // Render the list of post titles
 const renderPostList = async (posts) => {
+  
     let jsonPosts = await posts.json();
     if (window.location.pathname === '/post') {
       postList.forEach((el) => (el.innerHTML = ''));
     }
-  
+ console.log(jsonPosts)
+
     let postListItems = [];
-  
+
     // Returns HTML element 
-    const createLi = (user_id, post_text, post_url) => {
+    const createLi = async (user_id, post_text, post_url) => {
       const liEl = document.createElement('li');
       liEl.classList.add('card');
   
@@ -67,23 +66,26 @@ const renderPostList = async (posts) => {
       liEl.append(linkEl);
 
       const userEl = document.createElement('p');
-      userEl.innerText = getUsername(user_id);
+      userEl.innerText = await getUsername(user_id);
       liEl.append(userEl);
 
-      return liEl;
+      return new Promise((resolve, reject)=>{
+        resolve(liEl);
+      });
     };
   
-    jsonPosts.forEach((post) => {
-      const li = createLi(post.user_id, post.post_text, post.post_url);
+  
+    for (let i = 0; i < jsonPosts.length; i++) {
+      const li = await createLi(jsonPosts[i].user_id, jsonPosts[i].post_text, jsonPosts[i].post_url);
   
       postListItems.push(li);
-    });
+    };
   
     if (window.location.pathname === '/posts') {
       postListItems.forEach((post) => postList[0].append(post));
       postListItems.forEach((post) => console.log(post));
     }
-  };
+   };
   
 
 
