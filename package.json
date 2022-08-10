@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Konopie/project-2-placeholder#readme",
   "dependencies": {
+    "credential": "^2.0.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
