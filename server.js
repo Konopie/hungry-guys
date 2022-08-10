@@ -32,7 +32,7 @@ app.get('/posts', (req, res)=>{
 })
 
 //turn on the connection to the db server
-sequelize.sync({force: false}).then(() => {
+sequelize.sync({force: true}).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
     seedAll();
 })
