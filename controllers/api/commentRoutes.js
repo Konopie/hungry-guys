@@ -22,7 +22,7 @@ router.get("/:id", (req,res) =>{
   })
     .then(dbUserData => {
       if (!dbUserData) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No comment found with this id' });
         return;
       }
       res.json(dbUserData);
@@ -47,23 +47,24 @@ router.post("/", (req,res) =>{
 });
 
 router.delete("/:id", (req, res) =>{
-  Comment.destory({
+  console.log('id', req.params.id);
+  Comment.destroy({
     where: {
       id: req.params.id
     }
   })
-    .then(dbUserData =>{
-      if (!dbUserData){
-        res.status(404).json({ message: 'No user found with this id'});
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No comment found with this id' });
         return;
       }
-      res.json(dbUserData);
+      res.json(dbPostData);
     })
-    .catch(err =>{
+    .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
-  });
+});
 
 
 module.exports = router;
