@@ -14,7 +14,7 @@ let postList1 = document.querySelectorAll('.post-container');
   postText = document.querySelector('.post-textarea');
   postList = postList1[0]
   document.getElementById("search-bar").value = "";
-  
+
 //  get all posts
 const getPosts = () => 
         fetch('/api/post', {

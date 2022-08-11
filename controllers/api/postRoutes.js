@@ -1,5 +1,5 @@
 const express = require("express");
-const {Post, User, Comment, Rate} = require("../../models/");
+const {Post} = require("../../models/");
 
 const router = express.Router()
 
@@ -79,6 +79,10 @@ router.put('/:id', (req, res) => {
 
 // POST /api/post
 router.post("/", (req,res) =>{
+  // set id based on what the next index of the array will be
+  req.body.id = notesArray.length.toString();
+
+  console.log('post create')
   Post.create({
     id: req.body.id,
     user_id: req.body.user_id,
