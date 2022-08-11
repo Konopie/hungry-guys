@@ -23,12 +23,14 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use(routes);
 
+// render main page
 app.get('/', (req, res)=>{
     res.render('home');
 })
 
-app.get('/posts', (req, res)=>{
-    res.render('posts');
+// render create post page
+app.get('/create-post', (req, res)=>{
+    res.render('create-post');
 })
 
 //turn on the connection to the db server
