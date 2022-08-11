@@ -1,27 +1,24 @@
 
-let postLink
-let postText
-let postUser
+let formLink
+let formText
+let formUser
 
-console.log('working')
-postLink = document.getElementById('post-link').value;
-postText = document.getElementById('post-text').value;
-postUser = document.getElementById('user-id').value; 
+formLink = document.getElementById('form-link').value;
+formText = document.getElementById('form-text').value;
+formUser = document.getElementById('form-id').value; 
 
-const savePost = (post) => {
-    console.log('save post')
-fetch('/post', {
+const savePost = (form) => {
+fetch('/api/post', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify(form),
 })};
 
-document.getElementById('post-submit').addEventListener('click',
+document.getElementById('form-submit').addEventListener('click',
 ()=>{
-    console.log('event listener')
-    savePost({postUser, postText, postLink});
+    savePost(formUser, formText, formLink);
 
 }
 )

@@ -59,18 +59,11 @@ const getUsername = (id) => {
 // Render the list of post titles
 const renderPostList = async (posts) => {
   let jsonPosts = posts
-  console.log(jsonPosts)
-    // let jsonPosts = await posts.json();
-    if (window.location.pathname === '/post') {
-      postList.forEach((el) => (el.innerHTML = ''));
-    }
-
 
    let postListItems = []
 
     // Returns HTML element 
     const createLi = async (user_id, post_text, post_url) => {
-      console.log(user_id, post_text, post_url)
       const liEl = document.createElement('li');
       liEl.classList.add('card');
   
@@ -100,13 +93,10 @@ const renderPostList = async (posts) => {
   
     for (let i = 0; i < jsonPosts.length; i++) {
       const li = await createLi(jsonPosts[i].user_id, jsonPosts[i].post_text, jsonPosts[i].post_url);
-      console.log(postList)
-      console.log(li)
       postListItems.push(li);   
     };
 
       postListItems.forEach((post) =>{
-       console.log(post),
        postList.append(post)});
       postListItems.forEach((post) => console.log(post));
    
@@ -117,8 +107,7 @@ const renderPostList = async (posts) => {
 const getAndRenderPosts = () => getPosts()
   .then((res)=>{
   return res.json()})
-  .then( data => { 
-    console.log(data)
+  .then( data => {
   renderPostList(data)});
 
   document.getElementById('posts').addEventListener('click',

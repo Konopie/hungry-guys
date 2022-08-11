@@ -78,9 +78,9 @@ router.put('/:id', (req, res) => {
 });
 
 // POST /api/post
-router.post("/", (req,res) =>{
+router.post("*", (req,res) =>{
   // set id based on what the next index of the array will be
-  req.body.id = notesArray.length.toString();
+  req.body.id = Math.floor(Math.random() * 100),
 
   console.log('post create')
   Post.create({

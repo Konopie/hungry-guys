@@ -1,13 +1,13 @@
 <div class="col-md-10">
     <h1>Create A Post:</h1>
     <form>
-        <label for="post-text">Text</label>
-        <input type="text" id="post-text" name="post-text"><br>
-        <label for="post-link">Link to Website</label>
-        <input type="text" id="post-link" name="post-link"><br>
-        <label for="user-id">User ID</label>
-        <input type="text" id="user-id" name="user-id"><br>
-        <div class="border border-dark text-center" id="post-submit">Post</div>
+        <label for="form-text">Text</label>
+        <input type="text" id="form-text" name="form-text"><br>
+        <label for="form-link">Link to Website</label>
+        <input type="text" id="form-link" name="form-link"><br>
+        <label for="form-id">User ID</label>
+        <input type="text" id="form-id" name="form-id"><br>
+        <div class="border border-dark text-center" id="form-submit" onclick="savePost(document.getElementById('form-text').value, document.getElementById('form-link').value, document.getElementById('form-id').value)">Post</div>
     </form>
 </div>
-<script src="/assets/createPost.js"></script>
+<script src="/assets/js/createPost.js"></script>
