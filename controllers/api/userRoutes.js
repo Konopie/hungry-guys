@@ -34,6 +34,27 @@ router.get("/:id", (req,res) =>{
     });
 });
 
+// GET /api/user/username/*username
+router.get("/username/:user", (req,res) =>{
+  User.findOne({
+    where: {
+      username: req.params.user
+    },
+    attributes: {exclude: ['username', 'email', 'password']}
+  })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 // PUT /api/users/1
 router.put('/:id', (req, res) => {
   User.update(req.body, {
@@ -57,7 +78,6 @@ router.put('/:id', (req, res) => {
 // POST /api/user
 router.post("/", (req,res) =>{
   User.create({
-    id: req.body.id,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password

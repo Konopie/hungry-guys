@@ -1,24 +1,11 @@
 const express = require("express");
-const {Post, User} = require("../../models/");
 const {Post, User, Comment, Rate} = require("../../models/");
+
 const router = express.Router()
 
 // GET /api/post
 router.get("/", (req,res) =>{
-  Post.findAll({
-    attributes: [
-      'id',
-      'user_id',
-      'post_text',
-      'post_url'
-    ],
-    include: [
-      {
-        model: User,
-        attributes: ['username']
-      }
-    ]
-  })
+  Post.findAll()
     .then(dbUserData => {
       res.json(dbUserData)
     })
@@ -47,6 +34,28 @@ router.get("/:id", (req,res) =>{
       res.status(500).json(err);
     });
 });
+
+
+// GET /api/post/userID/1
+router.get("/userID/:id", (req,res) =>{
+  Post.findAll({
+    where: {
+      user_id: req.params.id
+    }
+  })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 
 // PUT /api/post/1
 router.put('/:id', (req, res) => {
