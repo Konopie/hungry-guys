@@ -7,6 +7,7 @@ const exphbs = require('express-handlebars');
 const helpers = require('./util/helpers');
 const hbs = exphbs.create({helpers});
 const routes = require("./controllers");
+const seedAll = require('./seeds')
 
 
 const sess = {
