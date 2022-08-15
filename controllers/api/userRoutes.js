@@ -1,6 +1,8 @@
 const express = require("express");
 const {User, Comment, Post, Rate} = require("../../models/");
 const router = express.Router();
+const {checkPassword} = require('../../util/helpers');
+let user;
 
 // GET /api/user
 router.get("/", (req,res) =>{
@@ -55,7 +57,7 @@ router.get("/username/:user", (req,res) =>{
     });
 });
 
-// PUT /api/users/1
+// PUT /api/user/1
 router.put('/:id', (req, res) => {
   User.update(req.body, {
     where: {
@@ -82,12 +84,69 @@ router.post("/", (req,res) =>{
     email: req.body.email,
     password: req.body.password
   })
-    .then(dbUserData => res.json(dbUserData))
+  .then(dbUserData => {
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json(dbUserData);
+    });
+  })
     .catch(err =>{
       console.log(err);
       res.status(500).json(err);
     })
 });
+
+// POST /api/user/login
+router.post('/login', (req, res) => {
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then(dbUserData => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email address!' });
+      return;
+    }
+    user = dbUserData;
+
+    async function validatePassword(input, hash){
+      const validate = await checkPassword(input, hash)
+      return validate;
+    }
+
+    return validatePassword(req.body.password, dbUserData.dataValues.password);
+  }).then(result => {
+    console.log(result);
+    if(!result){
+      res.status(400).json({message: 'Incorrect Password!'})
+      return;
+    }
+
+    req.session.save(() => {
+      // declare session variables
+      req.session.user_id = user.id;
+      req.session.username = user.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: user, message: 'You are now logged in!' });
+    });
+  });
+})
+
+//POST /api/user/logout
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+  else {
+    res.status(404).end();
+  }
+})
 
 // DELETE /api/user/1
 router.delete("/:id", (req, res) =>{

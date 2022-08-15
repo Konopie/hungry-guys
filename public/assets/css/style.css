@@ -1,4 +1,29 @@
-.main{
+.post-list{
+    text-align: left;
+    margin: 0px 2px 5px 2px;
+    list-style: none;
+}
 
-    background-color: blue;
-}  
+.post-list > *{
+    border: 2px solid black;
+    margin: 5px 0 5px 0; 
+    padding: 2px 0 2px
+}
+
+.post{
+    text-align: left;
+}
+
+.comments{
+    text-align: left;
+}
+
+.login-form, .signup-form{
+    margin: 20px;
+}
+
+.login-form > *, .signup-form > *{
+    margin: 5px;
+    text-align: left;
+    
+}

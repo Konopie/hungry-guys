@@ -38,7 +38,6 @@ User.init(
     hooks: {
       async beforeBulkCreate(newUserData) {
         console.log('begin hash')
-        console.log(newUserData[0]);
         for (let i = 0; i < newUserData.length; i++) {
           newUserData[i].dataValues.password = await hashPassword(newUserData[i].dataValues.password);
         }
