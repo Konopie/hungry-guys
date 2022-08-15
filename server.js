@@ -37,8 +37,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
 app.use(routes);
 
-const seedAll = require('./seeds');
+app.get('/', (req, res)=>{
+    res.render('home');
+})
 
+app.get('/posts', (req, res)=>{
+    res.render('posts');
+})
 
 //turn on the connection to the db server
 sequelize.sync({force: true}).then(() => {
