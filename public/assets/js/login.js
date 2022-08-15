@@ -44,7 +44,6 @@ async function loginFormHandler(event){
     });
     
 
-    console.log(response.body)
     if (response.ok){
       document.location.replace('/');
     }else{
