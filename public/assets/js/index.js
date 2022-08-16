@@ -1,10 +1,7 @@
 // const {Post} = require('../../../models/index.js')
-const express = require('express');
-const app = express();
 
  
-const searchBar = document.getElementById('search-bar')
-app.use("/images", express.static(path.join(__dirname, "/public/images")));
+const searchBar = document.getElementById('search-bar');
 let postTitle;
 let postText;
 let postList;
@@ -60,6 +57,10 @@ const getUsername = (id) => {
 // Render the list of post titles
 const renderPostList = async (posts) => {
   let jsonPosts = posts
+ 
+  while(postList.firstChild){
+    postList.innerHTML = ''; 
+  };
 
    let postListItems = []
 
