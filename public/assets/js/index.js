@@ -112,6 +112,7 @@ const getAndRenderPosts = () => getPosts()
 
   document.getElementById('posts').addEventListener('click',
   ()=>{
+    console.log('event listener')
     getAndRenderPosts();
   })
 

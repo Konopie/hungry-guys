@@ -42,9 +42,9 @@ app.get('/', (req, res)=>{
     res.render('home');
 })
 
-app.get('/posts', (req, res)=>{
-    res.render('posts');
-})
+// app.get('/posts', (req, res)=>{
+//     res.render('posts');
+// })
 
 //turn on the connection to the db server
 sequelize.sync({force: true}).then(() => {
