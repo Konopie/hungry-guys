@@ -3,7 +3,7 @@ const {Post} = require("../../models/");
 
 const router = express.Router()
 
-// GET /api/post
+// GET /api/post    get all posts from the database
 router.get("/", (req,res) =>{
   Post.findAll()
     .then(dbUserData => {
@@ -15,7 +15,7 @@ router.get("/", (req,res) =>{
     })
 });
 
-// GET /api/post/1
+// GET /api/post/1    retrieve a specific post based on the id of the user
 router.get("/:id", (req,res) =>{
   Post.findOne({
     where: {
@@ -36,7 +36,7 @@ router.get("/:id", (req,res) =>{
 });
 
 
-// GET /api/post/userID/1
+// GET /api/post/userID/1   retrieve a specific post based on the user within the db
 router.get("/userID/:id", (req,res) =>{
   Post.findAll({
     where: {
@@ -57,7 +57,7 @@ router.get("/userID/:id", (req,res) =>{
 });
 
 
-// PUT /api/post/1
+// PUT /api/post/1    modify a post that is within the db
 router.put('/:id', (req, res) => {
   Post.update(req.body, {
     where: {
@@ -77,7 +77,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// POST /api/post
+// POST /api/post   add a post to the database
 router.post("/", (req,res) =>{
   // set id based on what the next index of the array will be
   req.body.id = Math.floor(Math.random() * 100),
@@ -98,7 +98,7 @@ router.post("/", (req,res) =>{
     })
 });
 
-// DELETE /api/post/1
+// DELETE /api/post/1   remove a specific post from the db
 router.delete("/:id", (req, res) =>{
   console.log('id', req.params.id);
   Post.destroy({

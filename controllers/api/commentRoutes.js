@@ -2,6 +2,7 @@ const express = require("express");
 const {Comment} = require("../../models/");
 const router = express.Router()
 
+// GET /api/comment   get all comments within the database
 router.get("/", (req,res) =>{
   Comment.findAll()
   .then(dbUserData => {
@@ -14,6 +15,7 @@ router.get("/", (req,res) =>{
   })
 });
 
+// GET /api/comment   retrieve a comment based on the id provided
 router.get("/:id", (req,res) =>{
   Comment.findOne({
     where: {
@@ -30,12 +32,14 @@ router.get("/:id", (req,res) =>{
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-    });});
+    });
+});
 
+// POST /api/comment    create a new comment
 router.post("/", (req,res) =>{
   Comment.create({
     id: req.body.id,
-    user_id: req.body.user_id,
+    user_id: req.session.user_id,
     post_id: req.body.post_id,
     comment_text: req.body.comment_text
   })
@@ -46,6 +50,7 @@ router.post("/", (req,res) =>{
     });
 });
 
+// DELETE /api/comment    remove a comment based on id
 router.delete("/:id", (req, res) =>{
   console.log('id', req.params.id);
   Comment.destroy({
