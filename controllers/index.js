@@ -5,6 +5,6 @@ const homeRoutes = require('./homeroutes');
 
 //all router to use any routes declared in /api index.js and homeroutes.js
 router.use("/api", apiRoutes);
-router.use('/', homeRoutes);
+router.use('/home', homeRoutes);
 
 module.exports = router;
