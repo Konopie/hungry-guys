@@ -1,8 +1,9 @@
 // const {Post} = require('../../../models/index.js')
+const express = require('express');
+const app = express();
 
+ 
 const searchBar = document.getElementById('search-bar')
-const welcome = document.getElementById('welcome');
-const wrapper = document.getElementById('wrapper');
 app.use("/images", express.static(path.join(__dirname, "/public/images")));
 let postTitle;
 let postText;
