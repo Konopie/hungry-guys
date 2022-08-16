@@ -38,9 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
 app.use(routes);
 
-app.get('/home', (req, res)=>{
-    res.render('home');
-})
+// app.get('/home', (req, res)=>{
+//     res.render('home');
+// })
 
 app.get('/', (req, res)=>{
     res.render('login');
