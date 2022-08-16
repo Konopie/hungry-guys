@@ -78,7 +78,7 @@ router.put('/:id', (req, res) => {
 });
 
 // POST /api/post
-router.post("*", (req,res) =>{
+router.post("/", (req,res) =>{
   // set id based on what the next index of the array will be
   req.body.id = Math.floor(Math.random() * 100),
 
@@ -86,10 +86,12 @@ router.post("*", (req,res) =>{
   Post.create({
     id: req.body.id,
     user_id: req.body.user_id,
-    post_text: req.body.post_test,
+    post_text: req.body.post_text,
     post_url: req.body.post_url
   })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbUserData => {
+      console.log(dbUserData)
+      res.json(dbUserData)})
     .catch(err =>{
       console.log(err);
       res.status(500).json(err);

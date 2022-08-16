@@ -17,7 +17,7 @@ let postList1 = document.querySelectorAll('.post-container');
 
 //  get all posts
 const getPosts = () => 
-        fetch('/api/post', {
+        fetch('/api/post/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -118,11 +118,6 @@ const getAndRenderPosts = () => getPosts()
 // when you click the search button empty post list and load the searched users posts
 document.getElementById('search-btn').addEventListener('click', 
 () => {
-  console.log(postList)
-  while (postList.firstChild){
-    postList.removeChild(postList.firstChild)
-    wrapper.removeChild(welcome)
-  }
   getUserId(searchBar.value)
   .then((id)=>{
     return getUserPosts(id)

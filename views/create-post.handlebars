@@ -7,7 +7,7 @@
         <input type="text" id="form-link" name="form-link"><br>
         <label for="form-id">User ID</label>
         <input type="text" id="form-id" name="form-id"><br>
-        <div class="border border-dark text-center" id="form-submit" onclick="savePost(document.getElementById('form-text').value, document.getElementById('form-link').value, document.getElementById('form-id').value)">Post</div>
+        <div class="border border-dark text-center" id="form-submit" onclick="console.log(document.getElementById('form-text').value, document.getElementById('form-link').value, document.getElementById('form-id').value), savePost( document.getElementById('form-id').value, document.getElementById('form-text').value, document.getElementById('form-link').value)">Post</div>
     </form>
 </div>
 <script src="/assets/js/createPost.js"></script>
