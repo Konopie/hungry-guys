@@ -79,13 +79,16 @@ router.put('/:id', (req, res) => {
 
 // POST /api/post   add a post to the database
 router.post("/", (req,res) =>{
+  console.log(req.body);
   Post.create({
     id: req.body.id,
-    user_id: req.body.user_id,
-    post_text: req.body.post_test,
+    user_id: req.session.user_id,
+    post_text: req.body.post_text,
     post_url: req.body.post_url
   })
-    .then(dbUserData => res.json(dbUserData))
+    .then(dbUserData => {
+      res.json(dbUserData)
+    })
     .catch(err =>{
       console.log(err);
       res.status(500).json(err);

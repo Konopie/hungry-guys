@@ -126,7 +126,6 @@ searchBtn.addEventListener('click', () => {
   })
 });
 
-
 allPostBtn.addEventListener('click', () => {
   postList.innerHTML = "";
   getAndRenderPosts();

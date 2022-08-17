@@ -18,15 +18,15 @@
       </h1>
        <nav>
         <button id="logout" class="btn-no-style"><a href="/login">logout</a></button>
+        {{#if loggedIn}}
+        <button id="new-post" class="btn-no-style"><a href="/create-post">Create New Post</a></button>
+        {{/if}}
       </nav>
     </header>  
 
     {{{body}}}
     
   </div>
-  {{#if loggedIn}}
-  <script src="/assets/js/index.js"></script>
-  {{/if}}
   <script src="/assets/js/logout.js"></script>
 </body>
 
