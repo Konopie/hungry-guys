@@ -1,4 +1,3 @@
-// Deletes the login cookie and redirects back to login page
 async function logout() {
     const response = await fetch('/api/user/logout', {
       method: 'post',

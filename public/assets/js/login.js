@@ -1,4 +1,3 @@
-// Grabs new users information for creating a new user in the database
 async function signupFormHandler(event){
   event.preventDefault();
 
@@ -25,7 +24,6 @@ async function signupFormHandler(event){
   }
 }
 
-// Grabs users information for logging in to the database
 async function loginFormHandler(event){
   event.preventDefault();
 
