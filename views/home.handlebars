@@ -1,14 +1,23 @@
 <div class="row">
     <img src="images/cooking.jpeg" style="padding:30px; height:50vh;">
-    <h2 id="welcome">Welcome to the Hungry Guys</h2>
+    <h1 id="welcome">Welcome to the Hungry Guys {{username}}</h1>
+    <p id="user-name"></p>
     <p>We here at Hungry Guys have one mission, sharing awesome recipes with all our hungry members. </br>
     Feel free to join our group, share meals, rate and comment on recipes and find something </br> to fill your stomach and soul!</p>
 </div>
 
-<ol class="post-list">
+<div id="search-constainer">
+  <h3>Search For User Posts:</h3>
+  <p>Search</p>
+  <input id="search-bar"></input></br>
+  <button id="search-btn">Submit</button>
+  <button id="all-posts-btn">View All Posts</button>
+</div>
+
+<div class="post-list">
   {{#each posts as |post|}}
-  <li>
+  <div class="card">
     {{> post-info post}}
-  </li>
+  </div>
   {{/each}}
-</ol>
+</div>

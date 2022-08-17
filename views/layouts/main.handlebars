@@ -24,7 +24,9 @@
     {{{body}}}
     
   </div>
-  {{!-- <script src="/assets/js/index.js"></script> --}}
+  {{#if loggedIn}}
+  <script src="/assets/js/index.js"></script>
+  {{/if}}
   <script src="/assets/js/logout.js"></script>
 </body>
 

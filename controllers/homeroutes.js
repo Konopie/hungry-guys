@@ -4,33 +4,37 @@ const sequelize = require('sequelize');
 
 // GET redirect user to the main homepage and render all posts
 router.get('/', (req, res)=>{
-    Post.findAll({
-        attributes: [
-          'id',
-          'post_url',
-          'post_text',
-          'user_id'
-        ],
-        include: [
-          {
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-            include: {
-              model: User,
-              attributes: ['username']
-            }
-          },
-          {
-            model: User,
-            attributes: ['username']
-          }
-        ]
-      }).then(dbPostData => {
-        const posts = dbPostData.map(post => post.get({ plain: true }));
+  if(!req.session.loggedIn){
+    res.redirect('/login');
+    return;
+  }
 
-        res.render('home', { posts, loggedIn: req.session.loggedIn });
-      })
-    
+  Post.findAll({
+      attributes: [
+        'id',
+        'post_url',
+        'post_text',
+        'user_id'
+      ],
+      include: [
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  }).then(dbPostData => {
+    const posts = dbPostData.map(post => post.get({ plain: true }));
+
+    res.render('home', { posts, loggedIn: req.session.loggedIn, username: req.session.username });
+  })   
 })
 
 // GET redirect a user to a single post
