@@ -1,3 +1,4 @@
+// Grabs the information from the comment box and creates a new comment for the post
 async function commentFormHandler(event) {
     event.preventDefault();
 
