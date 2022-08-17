@@ -57,6 +57,7 @@ const getUsername = (id) => {
 // Render the list of post titles
 const renderPostList = async (posts) => {
   let jsonPosts = posts
+  console.log(jsonPosts);
     // let jsonPosts = await posts.json();
     if (window.location.pathname === '/post') {
       postList.forEach((el) => (el.innerHTML = ''));

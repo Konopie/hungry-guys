@@ -1,11 +1,35 @@
 const express = require("express");
 const {Post, User, Comment, Rate} = require("../../models/");
+const sequelize = require('../../config/connection.js')
 
 const router = express.Router()
 
 // GET /api/post    get all posts from the database
 router.get("/", (req,res) =>{
-  Post.findAll()
+  Post.findAll(
+    {
+      attributes: [
+        'id',
+        'user_id',
+        'post_text',
+        'post_url',
+      ],
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+          include: {
+            model: User,
+            attributes: ['username']
+          }
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    }
+  )
     .then(dbUserData => {
       res.json(dbUserData)
     })
